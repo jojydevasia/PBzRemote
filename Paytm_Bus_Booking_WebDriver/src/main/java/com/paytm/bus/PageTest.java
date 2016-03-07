@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
 
 public class PageTest {
-public static void main(String[] args)throws IOException {
+public static void main(String[] args)throws IOException, InterruptedException {
 	/*URL: beta1.paytm.com
 	username: paytmbeta
 	password: P@ytW8eTA
@@ -31,12 +31,18 @@ public static void main(String[] args)throws IOException {
 	
 	driver.findElement(By.xpath("//a[@href='/bus-tickets']")).click();
 	System.out.println(driver.findElement(By.xpath("//div[@class='box1']")).getText());
-	driver.findElement(By.xpath("//input[@id='input_32']")).sendKeys("Bangalore");
-	driver.findElement(By.xpath("//input[@id='input_33']")).sendKeys("Calicut");
-	driver.findElement(By.xpath("//input[@id='P494915865']")).sendKeys("15 Mar 2016");
+	System.out.println("*****************************************************");
+	System.out.println(driver.findElement(By.xpath("//label[text()='From (Origin)']")).getText());
+	WebElement we=driver.findElement(By.xpath("//label[text()='From (Origin)']/following-sibling::input"));
+	System.out.println(we);
 
 	
+	driver.findElement(By.xpath("//label[text()='From (Origin)']/following-sibling::input")).sendKeys("Bangalore");
+	driver.findElement(By.xpath("//label[text()='To (Destination)']/following-sibling::input")).sendKeys("Calicut");
+	driver.findElement(By.xpath("//label[text()='Select Date']/following-sibling::input[1]")).sendKeys("15 Mar 2016");
+
 	
+	  
 	//ArrayList al=new ArrayList();
 	 
 	//System.out.println(driver.getWindowHandles());
@@ -45,7 +51,8 @@ public static void main(String[] args)throws IOException {
 	//Credentials ccr=new Credentials()
 	//alrt.authenticateUsing("paytmbeta");
 	//driver.switchTo().
-	
+	Thread.sleep(10000);
+	driver.quit();
 	
 	}
 }
