@@ -41,7 +41,7 @@ public static void main(String[] args)throws IOException, InterruptedException {
 	driver.findElement(By.xpath("//label[text()='To (Destination)']/following-sibling::input")).sendKeys("Calicut");
 	driver.findElement(By.xpath("//label[text()='Select Date']/following-sibling::input[1]")).sendKeys("15 Mar 2016");
 
-	
+	System.out.println("hello");
 	  
 	//ArrayList al=new ArrayList();
 	 
