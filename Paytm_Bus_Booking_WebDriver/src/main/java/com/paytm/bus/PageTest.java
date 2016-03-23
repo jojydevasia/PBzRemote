@@ -26,10 +26,11 @@ public void selectTravelDate(int day,String month,String year) throws Interrupte
 	WebElement trvYear=driver.findElement(By.xpath("//div[@class='picker__year']"));
 	WebElement nxtButton=driver.findElement(By.xpath("//div[@class='picker__nav--next' and @data-nav='1']"));
 	
+	driver.findElement(By.xpath("//label[text()='Select Date']/following-sibling::input[1]")).click();
 	if(trvYear.getText().contains(year)){
 		if(trvMonth.getText().contains(month)){
-			driver.findElement(By.xpath("//label[text()='Select Date']/following-sibling::input[day]")).click();
 			
+			driver.findElement(By.xpath("//table//div[text()='30' and contains((@class),'infocus')]")).click();
 		} else {
 			nxtButton.click();
 			Thread.sleep(2000);
@@ -79,7 +80,7 @@ public static void main(String[] args)throws IOException, InterruptedException {
 	driver.findElement(By.xpath("//div[@class='picker__year']"));
 	driver.findElement(By.xpath("//div[@class='picker__nav--next' and @data-nav='1']"));
 	
-	driver.findElement(By.xpath("//table//div[text()='22']")).click();
+	driver.findElement(By.xpath("//table//div[text()='30' and contains((@class),'infocus')]")).click();
 	
 	
 	
