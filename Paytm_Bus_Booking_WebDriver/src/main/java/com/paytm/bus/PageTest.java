@@ -20,7 +20,7 @@ import org.testng.Assert;
 public class PageTest {
 	static WebDriver driver= new FirefoxDriver();
 	
-public void selectTravelDate(int day,String month,String year) throws InterruptedException{
+public static void selectTravelDate(String day,String month,String year) throws InterruptedException{
 	WebElement trvDay=driver.findElement(By.xpath("//label[text()='Select Date']/following-sibling::input[1]"));
 	WebElement trvMonth=driver.findElement(By.xpath("//div[@class='picker__month']"));
 	WebElement trvYear=driver.findElement(By.xpath("//div[@class='picker__year']"));
@@ -30,10 +30,11 @@ public void selectTravelDate(int day,String month,String year) throws Interrupte
 	if(trvYear.getText().contains(year)){
 		if(trvMonth.getText().contains(month)){
 			
-			driver.findElement(By.xpath("//table//div[text()='30' and contains((@class),'infocus')]")).click();
+			driver.findElement(By.xpath("//table//div[text()='"+day+"' and contains((@class),'infocus')]")).click();
 		} else {
 			nxtButton.click();
 			Thread.sleep(2000);
+			
 		}
 		
 	}
@@ -49,7 +50,7 @@ public static void main(String[] args)throws IOException, InterruptedException {
 	//driver.get("https://paytmbeta:P@ytW8eTA@beta1-assets.paytm.com");
 	//Runtime.getRuntime().exec("D:\\JojyDevasiaFolder\\AutoIT scripts\\HandleAuth.exe");
 	//driver.get("https://beta1.paytm.com");
-	driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+	driver.manage().timeouts().implicitlyWait(4, TimeUnit.SECONDS);
 	
 	//Thread.sleep(5000);
 		
@@ -75,12 +76,16 @@ public static void main(String[] args)throws IOException, InterruptedException {
 	System.out.println("EnStatus: "+enStatus);
 	
 	String curDate1=driver.findElement(By.xpath("//button[@value='Tomorrow']")).getText();
+	
+	/*Thread.sleep(3000);
 	driver.findElement(By.xpath("//label[text()='Select Date']/following-sibling::input[1]")).click();
 	driver.findElement(By.xpath("//div[@class='picker__month']"));
 	driver.findElement(By.xpath("//div[@class='picker__year']"));
-	driver.findElement(By.xpath("//div[@class='picker__nav--next' and @data-nav='1']"));
+	driver.findElement(By.xpath("//div[@class='picker__nav--next' and @data-nav='1']")); */
+
 	
-	driver.findElement(By.xpath("//table//div[text()='30' and contains((@class),'infocus')]")).click();
+	selectTravelDate("12","April","2016");
+	//driver.findElement(By.xpath("//table//div[text()='30' and contains((@class),'infocus')]")).click();
 	
 	
 	
