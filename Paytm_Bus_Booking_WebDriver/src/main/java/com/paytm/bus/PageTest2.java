@@ -36,7 +36,7 @@ public class PageTest2 {
 		driver.findElement(By.xpath("//span[text()='CANCEL']/ancestor::a"));//cancel button in forgot pwd UI.
 		driver.findElement(By.xpath("//span[text()='RESET PASSWORD']/ancestor::button"));//Reset pwd button
 		driver.findElement(By.xpath("//md-dialog/button[@ng-click='closeModal()']"));// login frame close button
-		
+		//driver.findElement
 		
 		//finally{
 			//driver.quit();
