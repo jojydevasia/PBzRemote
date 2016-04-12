@@ -47,7 +47,7 @@ public static void main(String[] args)throws IOException, InterruptedException {
 	
 	driver.manage().window().maximize();
 	/*//The following block is just for staging environment
-	//driver.get("https://paytmbeta:P@ytW8eTA@beta1-assets.paytm.com");
+	//driver.get("https://paytmbeta:*********@beta1-assets.paytm.com");
 	//Runtime.getRuntime().exec("D:\\JojyDevasiaFolder\\AutoIT scripts\\HandleAuth.exe");
 	//driver.get("https://beta1.paytm.com");   */
 	
@@ -143,8 +143,8 @@ public static void main(String[] args)throws IOException, InterruptedException {
 	System.out.println("FrameTitle : "+fTitl);
 	System.out.println("Text 4 Frame: ");
 	System.out.println(driver.findElement(By.xpath("//*[@id='wallet-container-new']/ul")).getText());
-	driver.findElement(By.xpath("//input[@id='input_0']")).sendKeys("9448879224");
-	driver.findElement(By.cssSelector("#input_1")).sendKeys("$$@P0lleH");
+	driver.findElement(By.xpath("//input[@id='input_0']")).sendKeys("9.....");
+	driver.findElement(By.cssSelector("#input_1")).sendKeys(".........");
 	driver.findElement(By.xpath("//button[@type='submit']")).click();
 	//ssfss
 

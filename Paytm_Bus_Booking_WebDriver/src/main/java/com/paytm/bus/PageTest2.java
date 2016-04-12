@@ -23,8 +23,8 @@ public class PageTest2 {
 		driver.findElement(By.xpath("//a[contains(text(),'Log In')]")).click();//Log In link in home page.
 		Thread.sleep(3000);
 	    driver.switchTo().frame(2);
-		driver.findElement(By.xpath("//md-input-container[1]/input")).sendKeys("9448879224");
-		driver.findElement(By.xpath("//md-input-container[2]/input")).sendKeys("$$@P0lleH");
+		driver.findElement(By.xpath("//md-input-container[1]/input")).sendKeys("..........");
+		driver.findElement(By.xpath("//md-input-container[2]/input")).sendKeys(",....");
 		driver.findElement(By.xpath("//button/span[normalize-space(text()='Secure Login')]")).click();
 		Thread.sleep(15000);
 		driver.findElement(By.xpath("//md-content//input[@id='input_2']")).sendKeys("OTP");///OTP input  box
