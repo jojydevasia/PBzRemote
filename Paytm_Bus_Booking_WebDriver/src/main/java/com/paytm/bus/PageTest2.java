@@ -35,7 +35,6 @@ public class PageTest2 {
 		driver.findElement(By.xpath("//label[starts-with(text(),'Enter your Mobile')]//following-sibling::input"));//mobile number field for forgot password
 		driver.findElement(By.xpath("//span[text()='CANCEL']/ancestor::a"));//cancel button in forgot pwd UI.
 		driver.findElement(By.xpath("//span[text()='RESET PASSWORD']/ancestor::button"));//Reset pwd button
-		
 		driver.findElement(By.xpath("//md-dialog/button[@ng-click='closeModal()']"));// login frame close button
 		
 		
