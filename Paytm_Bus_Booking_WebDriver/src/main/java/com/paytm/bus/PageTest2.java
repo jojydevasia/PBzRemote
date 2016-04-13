@@ -3,6 +3,10 @@ package com.paytm.bus;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Iterator;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,8 +14,33 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+
+
+
 public class PageTest2 {
 	static WebDriver driver= new FirefoxDriver();
+	
+	public static String getTestData() throws IOException{
+		FileInputStream fis=new FileInputStream("D:\\TestDataFiles\\PTMBz Test Data.xlsx");
+		XSSFWorkbook wb=new XSSFWorkbook(fis);
+		XSSFSheet sh=wb.getSheet("Login");
+		XSSFRow row;
+		for(int i=1;i<sh.getLastRowNum();i++){
+			row=sh.getRow(i);
+			for(int j=0;j<row.getLastCellNum();j++){
+				XSSFCell col=row.getCell(j);
+			}
+			
+		}
+			
+		    
+		
+		
+	}
 
 	
 	public static void main(String[] args) throws InterruptedException{
