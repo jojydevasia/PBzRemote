@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -22,28 +22,10 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 
 
 public class PageTest2 {
-	static WebDriver driver= new FirefoxDriver();
+	static WebDriver driver;
 	
-	public static String getTestData() throws IOException{
-		FileInputStream fis=new FileInputStream("D:\\TestDataFiles\\PTMBz Test Data.xlsx");
-		XSSFWorkbook wb=new XSSFWorkbook(fis);
-		XSSFSheet sh=wb.getSheet("Login");
-		XSSFRow row;
-		for(int i=1;i<sh.getLastRowNum();i++){
-			row=sh.getRow(i);
-			for(int j=0;j<row.getLastCellNum();j++){
-				XSSFCell col=row.getCell(j);
-			}
-			
-		}
-			
-		    
-		
-		
-	}
-
-	
-	public static void main(String[] args) throws InterruptedException{
+	public static void main(String[] args) throws InterruptedException, InvalidFormatException, IOException{
+		driver= new FirefoxDriver();
 		driver.get("http://paytm.com");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -52,8 +34,8 @@ public class PageTest2 {
 		driver.findElement(By.xpath("//a[contains(text(),'Log In')]")).click();//Log In link in home page.
 		Thread.sleep(3000);
 	    driver.switchTo().frame(2);
-		driver.findElement(By.xpath("//md-input-container[1]/input")).sendKeys("..........");
-		driver.findElement(By.xpath("//md-input-container[2]/input")).sendKeys(",....");
+		driver.findElement(By.xpath("//md-input-container[1]/input")).sendKeys("uid");
+		driver.findElement(By.xpath("//md-input-container[2]/input")).sendKeys("pwd");
 		driver.findElement(By.xpath("//button/span[normalize-space(text()='Secure Login')]")).click();
 		Thread.sleep(15000);
 		driver.findElement(By.xpath("//md-content//input[@id='input_2']")).sendKeys("OTP");///OTP input  box
@@ -65,11 +47,9 @@ public class PageTest2 {
 		driver.findElement(By.xpath("//span[text()='CANCEL']/ancestor::a"));//cancel button in forgot pwd UI.
 		driver.findElement(By.xpath("//span[text()='RESET PASSWORD']/ancestor::button"));//Reset pwd button
 		driver.findElement(By.xpath("//md-dialog/button[@ng-click='closeModal()']"));// login frame close button
-		//driver.findElement
 		
-		//finally{
 			//driver.quit();
-		//}
+		
 	}
 
 }

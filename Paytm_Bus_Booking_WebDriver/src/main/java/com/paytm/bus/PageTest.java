@@ -44,7 +44,10 @@ public class PageTest {
 
 	
 public static void main(String[] args)throws IOException, InterruptedException {
-	
+	try{
+		
+	String uid=ReadXL.getTestData("Login",1,0);
+	String pwd=ReadXL.getTestData("Login",1,1);
 	driver.manage().window().maximize();
 	/*//The following block is just for staging environment
 	//driver.get("https://paytmbeta:*********@beta1-assets.paytm.com");
@@ -143,10 +146,9 @@ public static void main(String[] args)throws IOException, InterruptedException {
 	System.out.println("FrameTitle : "+fTitl);
 	System.out.println("Text 4 Frame: ");
 	System.out.println(driver.findElement(By.xpath("//*[@id='wallet-container-new']/ul")).getText());
-	driver.findElement(By.xpath("//input[@id='input_0']")).sendKeys("9.....");
-	driver.findElement(By.cssSelector("#input_1")).sendKeys(".........");
+	driver.findElement(By.xpath("//input[@id='input_0']")).sendKeys(uid);
+	driver.findElement(By.cssSelector("#input_1")).sendKeys(pwd);
 	driver.findElement(By.xpath("//button[@type='submit']")).click();
-	//ssfss
 
 	
 	Thread.sleep(60000);
@@ -161,6 +163,10 @@ public static void main(String[] args)throws IOException, InterruptedException {
 		 
     Thread.sleep(6000);
 	driver.quit();
+	}
+	catch(Exception e){
+		e.printStackTrace();
+	}
 	
 	}
 }
