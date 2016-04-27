@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.io.File;
@@ -89,8 +90,32 @@ public class TestAC {
 		driver.findElement(By.xpath("//div/span[contains(text(),'With Air Conditioner')]")).click();
 		Thread.sleep(2000);
 		List<WebElement>  tripRecord=driver.findElements(By.xpath("//div[@class='bus-ticket-container']"));
-		System.out.println("[[Total # of records: " + tripRecord.size()+"]]\n-------------------\n\n");
+		System.out.println("[[Total # of records: " + (tripRecord.size()-1)+"]]\n-------------------\n\n");
+		List<String> tripText=new ArrayList<String>();
+		for(WebElement we1:tripRecord){
+			tripText.add(we1.getText()+"-");
+		}
 		
+		List<WebElement> busDetails=(driver.findElements(By.xpath("//div[@class='headTop']/span")));
+		List<String> busText=new ArrayList<String>();
+		for(WebElement we2:busDetails){
+			busText.add(we2.getText()+"-");
+		}
+		
+		for(int i=0;i<busText.size();i++){
+			String a= busText.get(i);
+			System.out.println("\nRecord # : "+(i+1));
+			System.out.println(a);
+			System.out.println("__________________________________________________");
+		
+			String b=tripText.get(i+1);
+			System.out.println(b);
+			System.out.println("===================================================");
+			
+		}
+		
+		
+		/*
 		for(int i=1;i<tripRecord.size();i++){
 			WebElement tripHeader=driver.findElement(By.xpath("(//div[@class='headTop']/span)["+i+"]"));
 			Thread.sleep(2000);
@@ -109,8 +134,8 @@ public class TestAC {
 		    	System.out.println("Details are correct\n___________________________________\n");
 		    }
 			
-		} 
-		System.out.println("\n\n________________\nIteration completed");
+		}        */
+		System.out.println("\n\n________________\n Iteration completed");
 		
 		//WebElement tripHeader=driver.findElement(By.xpath("(//div[@class='headTop']/span)[1]"));
 		//String tripTitle=tripHeader.getText();

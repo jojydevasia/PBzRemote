@@ -3,7 +3,7 @@ package com.paytm.bus;
 
 public class StringComTst {
 	public static void main(String[] args){
-		String tripTitle=("Manish Travels2+1, Sleeper, AC, Non-Video").toLowerCase();
+		String tripTitle=("Parveen Travels2+2 Single Tier Hi-Tech Semi Sleeper Multiaxle A/C Go Green Scania").toLowerCase();
 		if(tripTitle.contains("non-ac")||tripTitle.contains("non -ac")||tripTitle.contains("non ac")||tripTitle.contains("non-a/c")
 				||tripTitle.contains("non a/c")||tripTitle.contains("non-a-c")||tripTitle.contains("non a-c")||tripTitle.contains("non.a/c")
 				||tripTitle.contains("non.a-c")||tripTitle.contains("non.ac")||tripTitle.contains("non a.c")||tripTitle.contains("non-a.c")
