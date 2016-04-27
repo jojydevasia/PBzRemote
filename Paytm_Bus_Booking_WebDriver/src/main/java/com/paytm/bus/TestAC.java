@@ -96,21 +96,36 @@ public class TestAC {
 			tripText.add(we1.getText()+"-");
 		}
 		
-		List<WebElement> busDetails=(driver.findElements(By.xpath("//div[@class='headTop']/span")));
+		List<WebElement> busDetails=(driver.findElements(By.xpath("//div[@aria-hidden='false']/div/div[@class='headTop']/span")));
 		List<String> busText=new ArrayList<String>();
 		for(WebElement we2:busDetails){
 			busText.add(we2.getText()+"-");
 		}
 		
 		for(int i=0;i<busText.size();i++){
-			String a= busText.get(i);
-			System.out.println("\nRecord # : "+(i+1));
-			System.out.println(a);
-			System.out.println("__________________________________________________");
-		
-			String b=tripText.get(i+1);
-			System.out.println(b);
-			System.out.println("===================================================");
+			String bTxt= (busText.get(i)).toLowerCase();
+			
+			String tTxt=tripText.get(i+1);
+				
+			//System.out.println(a);
+			//System.out.println("__________________________________________________");
+			
+			if(bTxt.contains("non-ac")||bTxt.contains("non -ac")||bTxt.contains("non ac")||bTxt.contains("non-a/c")
+					||bTxt.contains("non a/c")||bTxt.contains("non-a-c")||bTxt.contains("non a-c")||bTxt.contains("non.a/c")
+					||bTxt.contains("non.a-c")||bTxt.contains("non.ac")||bTxt.contains("non a.c")||bTxt.contains("non-a.c")
+					||bTxt.contains("non_a/c")||bTxt.contains("non_ac")||bTxt.contains("non_a.c")||bTxt.contains("non_a-c")){
+				
+				System.out.println("This trip has a detail mismatch\n ");
+				System.out.println("\nRecord # : "+(i+1));
+		    	System.out.println(bTxt+"\n===================\n");
+		    	System.out.println(tTxt);
+		    	System.out.println("\n______________________________________\n");
+		    }
+			
+			
+			//String tTxt=tripText.get(i+1);
+			//System.out.println(tTxt);
+			//System.out.println("===================================================");
 			
 		}
 		
@@ -119,14 +134,14 @@ public class TestAC {
 		for(int i=1;i<tripRecord.size();i++){
 			WebElement tripHeader=driver.findElement(By.xpath("(//div[@class='headTop']/span)["+i+"]"));
 			Thread.sleep(2000);
-			String tripTitle=(tripHeader.getText()).toLowerCase();
-			if(tripTitle.contains("non-ac")||tripTitle.contains("non -ac")||tripTitle.contains("non ac")||tripTitle.contains("non-a/c")
-					||tripTitle.contains("non a/c")||tripTitle.contains("non-a-c")||tripTitle.contains("non a-c")||tripTitle.contains("non.a/c")
-					||tripTitle.contains("non.a-c")||tripTitle.contains("non.ac")||tripTitle.contains("non a.c")||tripTitle.contains("non-a.c")
-					||tripTitle.contains("non_a/c")||tripTitle.contains("non_ac")||tripTitle.contains("non_a.c")||tripTitle.contains("non_a-c")){
+			String bTxt=(tripHeader.getText()).toLowerCase();
+			if(bTxt.contains("non-ac")||bTxt.contains("non -ac")||bTxt.contains("non ac")||bTxt.contains("non-a/c")
+					||bTxt.contains("non a/c")||bTxt.contains("non-a-c")||bTxt.contains("non a-c")||bTxt.contains("non.a/c")
+					||bTxt.contains("non.a-c")||bTxt.contains("non.ac")||bTxt.contains("non a.c")||bTxt.contains("non-a.c")
+					||bTxt.contains("non_a/c")||bTxt.contains("non_ac")||bTxt.contains("non_a.c")||bTxt.contains("non_a-c")){
 		    	System.out.println("Bus Record # : "+i);
 		    	System.out.println("This trip has a detail mismatch\n ");
-		    	//System.out.println(tripTitle+"\n===================");
+		    	//System.out.println(bTxt+"\n===================");
 		    	System.out.println((driver.findElement(By.xpath("(//div[@class='bus-ticket-container'])["+i+"]")).getText()));
 		    	System.out.println("\n______________________________________\n");
 		    }else{
@@ -138,8 +153,8 @@ public class TestAC {
 		System.out.println("\n\n________________\n Iteration completed");
 		
 		//WebElement tripHeader=driver.findElement(By.xpath("(//div[@class='headTop']/span)[1]"));
-		//String tripTitle=tripHeader.getText();
-		//System.out.println(tripTitle);
+		//String bTxt=tripHeader.getText();
+		//System.out.println(bTxt);
 		//System.out.println("TestEnd");
 	}
 	

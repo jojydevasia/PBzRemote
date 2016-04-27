@@ -29,8 +29,8 @@ public class PageTest2 {
 	
 	public static void main(String[] args) throws InterruptedException, InvalidFormatException, IOException{
 		//System.setProperty("webdriver.chrome.driver", "D:\\JojyDevasiaFolder\\Automation sw Lib\\chromedriver\\chromedriver.exe");
-		String uid=ReadXL.getTestData("Login",2,0);
-		String pwd=ReadXL.getTestData("Login",2,1);
+		String uid=ReadWriteXL.getXLData("Login",2,0);
+		String pwd=ReadWriteXL.getXLData("Login",2,1);
 
 		driver= new FirefoxDriver();
 		//driver=new ChromeDriver();

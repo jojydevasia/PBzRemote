@@ -11,10 +11,10 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ReadXL {
+public class ReadWriteXL {
 
 
-	public static String getTestData(String sheetName,int rowNo, int colNo) throws IOException,InvalidFormatException{
+	public static String getXLData(String sheetName,int rowNo, int colNo) throws IOException,InvalidFormatException{
 
 		File dataFile=new File("D:\\TestDataFiles\\PTMBz Test Data.xlsx");
 		FileInputStream fis= new FileInputStream(dataFile);
