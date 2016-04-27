@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -54,8 +55,11 @@ public class PageTest2 {
 		System.out.println(driver.findElement(By.xpath("//li/span[starts-with(text(),'We will send a link on your')]")).getText());//forgot password UI message
 		Thread.sleep(3000);
 		//driver.findElement(By.xpath("//label[starts-with(text(),'Enter your Mobile')]")).sendKeys("9448879224");
-		driver.findElement(By.xpath("//label[starts-with(text(),'Enter your Mobile')]")).click();
-		driver.findElement(By.name("username")).sendKeys("9448879224");
+		Actions act=new Actions(driver);
+		act.click(driver.findElement(By.xpath("//label[starts-with(text(),'Enter your Mobile')]")));
+		act.sendKeys(driver.findElement(By.xpath("//label[starts-with(text(),'Enter your Mobile')]//following-sibling::input")),"9448879224").perform();
+		//act.moveToElement(driver.findElement(By.name("username")))..build().perform();
+		
 
 		//driver.findElement(By.xpath("//label[starts-with(text(),'Enter your Mobile')]//following-sibling::input")).sendKeys("9448879224");//mobile number field for forgot password
 		//driver.findElement(By	.xpath("//span[text()='CANCEL']/ancestor::a")).click();//cancel button in forgot pwd UI.

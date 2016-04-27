@@ -47,23 +47,4 @@ public class ReadXL {
 		return cellData;
 		}
 
-	
-
-/*	public static void main(String[] args){
-		try {
-			String data=getTestData("Login",2,1);
-			System.out.println(data);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch(InvalidFormatException i){
-			i.printStackTrace();
-		}
-
-
-	}*/
-
-
-
 }
