@@ -1,9 +1,34 @@
 package com.paytm.bus;
 
+import java.io.IOException;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 
 public class StringComTst {
+	static String date;
 	public static void main(String[] args){
-		String tripTitle=("Parveen Travels2+2 Single Tier Hi-Tech Semi Sleeper Multiaxle A/C Go Green Scania").toLowerCase();
+		try {
+			date=ReadWriteXL.getXLData("D:\\TestDataFiles\\PtmBzRouteDate.xlsx","BusRoutes", 1,1 );
+			System.out.println(date);
+			
+				ReadWriteXL.writeXLData("D:\\TestDataFiles\\acDetailMismatch.xlsx","MismatchDetail", 3, 2, "Test Data");
+			
+			
+			
+		} catch (InvalidFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		/*String tripTitle=("Parveen Travels2+2 Single Tier Hi-Tech Semi Sleeper Multiaxle A/C Go Green Scania").toLowerCase();
 		if(tripTitle.contains("non-ac")||tripTitle.contains("non -ac")||tripTitle.contains("non ac")||tripTitle.contains("non-a/c")
 				||tripTitle.contains("non a/c")||tripTitle.contains("non-a-c")||tripTitle.contains("non a-c")||tripTitle.contains("non.a/c")
 				||tripTitle.contains("non.a-c")||tripTitle.contains("non.ac")||tripTitle.contains("non a.c")||tripTitle.contains("non-a.c")
@@ -11,7 +36,7 @@ public class StringComTst {
 	    	System.out.println("String Mismatch Caught");
 	    }else{
 	    	System.out.println("String is OK");
-	    }
+	    }*/
 		
 	} 
 	
