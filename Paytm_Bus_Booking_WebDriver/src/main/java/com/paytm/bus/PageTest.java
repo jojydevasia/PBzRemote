@@ -46,8 +46,8 @@ public class PageTest {
 public static void main(String[] args)throws IOException, InterruptedException {
 	try{
 		
-	String uid=ReadWriteXL.getXLData("Login",1,0);
-	String pwd=ReadWriteXL.getXLData("Login",1,1);
+	String uid=ReadWriteXL.readXLData("D:\\TestDataFiles\\PTMBz Test Data.xlsx","Login", 1,0);
+	String pwd=ReadWriteXL.readXLData("D:\\TestDataFiles\\PTMBz Test Data.xlsx","Login", 1,1);
 	driver.manage().window().maximize();
 	/*//The following block is just for staging environment
 	//driver.get("https://paytmbeta:*********@beta1-assets.paytm.com");

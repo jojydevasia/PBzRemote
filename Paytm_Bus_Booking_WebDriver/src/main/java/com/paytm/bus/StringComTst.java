@@ -9,10 +9,10 @@ public class StringComTst {
 	static String date;
 	public static void main(String[] args){
 		try {
-			date=ReadWriteXL.getXLData("D:\\TestDataFiles\\PtmBzRouteDate.xlsx","BusRoutes", 1,1 );
+			date=ReadWriteXL.readXLData("D:\\TestDataFiles\\PtmBzRouteDate.xlsx","BusRoutes",1,2 );
 			System.out.println(date);
 			
-				ReadWriteXL.writeXLData("D:\\TestDataFiles\\acDetailMismatch.xlsx","MismatchDetail", 3, 2, "Test Data");
+				ReadWriteXL.writeXLData("D:\\TestDataFiles\\acDetailMismatch.xlsx","MismatchDetail", 3, 2, "2016-05-29");
 			
 			
 			
