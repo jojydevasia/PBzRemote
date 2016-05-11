@@ -26,6 +26,7 @@ public class ReadWriteXL {
 		XSSFCell col;
 		String cellData = null;
 
+
 		row=sh.getRow(rowNo);
 		col=row.getCell(colNo);
 		switch(col.getCellType()){
@@ -47,15 +48,15 @@ public class ReadWriteXL {
 			cellData="null";
 			//System.out.println("CellType: "+col.getCellType());
 			break;
-		
+
 		}
-		
+
 		fin.close();
 		return cellData;
-		
+
 	}
-	
-	
+
+
 	public static void writeXLData(String fileName,String sheetName, int rowNo,int colNo, String bzTxt) throws Exception{
 		File dataFile1= new File(fileName);
 		FileInputStream fin1=new FileInputStream(dataFile1);
@@ -63,20 +64,33 @@ public class ReadWriteXL {
 		XSSFSheet sh1=wb1.getSheet(sheetName);
 		XSSFRow row;
 		XSSFCell col;
-		row=sh1.createRow(rowNo);
+		if(sh1.getRow(rowNo)==null){
+			row=sh1.createRow(rowNo);
+			col=row.createCell(colNo);
+			col.setCellType(XSSFCell.CELL_TYPE_STRING);
+			col.setCellValue(bzTxt);
+
+			fin1.close();
+
+			FileOutputStream fout2=new FileOutputStream(dataFile1);
+			wb1.write(fout2);
+			//fout2.close();
+		}else
+
+		row=sh1.getRow(rowNo);
 		col=row.createCell(colNo);
 		col.setCellType(XSSFCell.CELL_TYPE_STRING);
 		col.setCellValue(bzTxt);
-		
+
 		fin1.close();
-		
+
 		FileOutputStream fout2=new FileOutputStream(dataFile1);
 		wb1.write(fout2);
-		fout2.close();
-		
+		//fout2.close();
+
 	} 
-	
-	
+
+
 	public static int getRowCount(String fileName,String sheetName) throws Exception{
 		File dataFile=new File(fileName);
 		FileInputStream fin=new FileInputStream(dataFile);
@@ -86,7 +100,7 @@ public class ReadWriteXL {
 		fin.close();
 		return rowCount;
 	}
-	
+
 	public static int getLastRowNum(String fileName,String sheetName)throws Exception{
 		File dataFile=new File(fileName);
 		FileInputStream fin=new FileInputStream(dataFile);
@@ -96,6 +110,6 @@ public class ReadWriteXL {
 		fin.close();
 		return lastRowNum;
 	}
-	
+
 
 }

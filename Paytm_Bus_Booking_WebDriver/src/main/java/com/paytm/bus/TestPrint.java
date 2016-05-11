@@ -40,25 +40,28 @@ public class TestPrint {
 		for(int k=1; k<=lastRow; k++){
 			String origin=ReadWriteXL.readXLData("D:\\TestDataFiles\\PtmBzRouteDate.xlsx", "BusRoutes",k,0);
 
-			for(int m=k;m<=lastRow;m++){
+			for(int m=1;m<=lastRow;m++){
 
-				String destination=ReadWriteXL.readXLData("D:\\TestDataFiles\\PtmBzRouteDate.xlsx", "BusRoutes",k,1);
-				String jrDate=ReadWriteXL.readXLData("D:\\TestDataFiles\\PtmBzRouteDate.xlsx", "BusRoutes",k,2);
-				if(origin==destination){
+				String destination=ReadWriteXL.readXLData("D:\\TestDataFiles\\PtmBzRouteDate.xlsx", "BusRoutes",m,1);
+				String jrDate=ReadWriteXL.readXLData("D:\\TestDataFiles\\PtmBzRouteDate.xlsx", "BusRoutes",m,2);
+				if(origin.equalsIgnoreCase(destination)){
 					continue;
+				}else{
+					String url="https://paytm.com/bus-tickets/search/"+origin+"/"+destination+jrDate+"1";
+					if (jrDate.equalsIgnoreCase("/2016-05-22/")){
+						continue;
+					}else{
+						int lastRowNum=ReadWriteXL.getLastRowNum("D:\\TestDataFiles\\acDetailMismatch.xlsx","MismatchDetail");
+						int count=lastRowNum+1;
+						ReadWriteXL.writeXLData("D:\\TestDataFiles\\acDetailMismatch.xlsx","MismatchDetail",count,0,""+count+"");
+						ReadWriteXL.writeXLData("D:\\TestDataFiles\\acDetailMismatch.xlsx","MismatchDetail",count,1,origin+"-"+destination);
+						ReadWriteXL.writeXLData("D:\\TestDataFiles\\acDetailMismatch.xlsx","MismatchDetail",count,2,url);
+						System.out.println("URL: "+url);
+						count++;
+					}
+					
 				}
-				String url="https://paytm.com/bus-tickets/search/"+origin+"/"+destination+jrDate+"1";
-				System.out.println("URL: "+url);
-				if (jrDate=="/2016-05-22/"){
-					continue;
-				}
-				int lastRowNum=ReadWriteXL.getLastRowNum("D:\\TestDataFiles\\acDetailMismatch.xlsx","MismatchDetail");
-				int count=lastRowNum+1;
-				ReadWriteXL.writeXLData("D:\\TestDataFiles\\acDetailMismatch.xlsx","MismatchDetail",count,0,""+count+"");
-				ReadWriteXL.writeXLData("D:\\TestDataFiles\\acDetailMismatch.xlsx","MismatchDetail",count,1,origin+"-"+destination);
-				ReadWriteXL.writeXLData("D:\\TestDataFiles\\acDetailMismatch.xlsx","MismatchDetail",count,2,url);
-				count++;
-				System.out.println("URL: "+url);  
+				
 
 				/*int r=ReadWriteXL.getLastRowNum("D:\\TestDataFiles\\PtmBzRouteDate.xlsx", "BusRoutes");
 		System.out.println("Last Row Number = "+r);*/
