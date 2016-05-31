@@ -10,7 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 
 public class SelectDate {
-	public static String trvDate="10-May 2016";
+ /*	public static String trvDate="10-May 2016";
 	static String splitter[]=trvDate.split("-");
 	String trvDay=splitter[0];
 	String month_year=splitter[1];
@@ -36,6 +36,6 @@ public class SelectDate {
 	}
 	public static void main(String[] args){
 		System.out.println(splitter[0] +"\n" +splitter[1]);
-	}
+	}   */
 
 }

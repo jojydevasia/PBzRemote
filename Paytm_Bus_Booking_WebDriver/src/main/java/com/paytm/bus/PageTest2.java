@@ -1,5 +1,7 @@
 package com.paytm.bus;
 
+//DUMMY INTERMEDIATE FILE. DO NOT FINALIZE
+
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -29,8 +31,8 @@ public class PageTest2 {
 	
 	public static void main(String[] args) throws InterruptedException, InvalidFormatException, IOException{
 		//System.setProperty("webdriver.chrome.driver", "D:\\JojyDevasiaFolder\\Automation sw Lib\\chromedriver\\chromedriver.exe");
-		String uid=ReadWriteXL.getXLData("Login",2,0);
-		String pwd=ReadWriteXL.getXLData("Login",2,1);
+		String uid=ReadWriteXL.readXLData("filepath","Login",2,0);
+		String pwd=ReadWriteXL.readXLData("filepath","Login",2,1);
 
 		driver= new FirefoxDriver();
 		//driver=new ChromeDriver();

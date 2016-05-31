@@ -1,8 +1,11 @@
 package com.paytm.bus;
 
+//Use this program to do the filter test for A/C buses.
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.ArrayList;
@@ -23,15 +26,18 @@ public class TestAcFilter {
 	static WebDriver driver;
 
 	public static void main(String[] args) throws InterruptedException, IOException{
-		driver=new FirefoxDriver();
+		
 
 		try {
 			int lastRow=ReadWriteXL.getRowCount("D:\\TestDataFiles\\PtmBzRouteDate.xlsx", "BusRoutes")-1;
-			for(int k=1; k<=lastRow; k++){
-				String origin=ReadWriteXL.readXLData("D:\\TestDataFiles\\PtmBzRouteDate.xlsx", "BusRoutes",k,0);
+			
+			String[] colNames={"S.No","Route","Details"};
+			ReadWriteXL.writeNewXLFile("D:\\TestDataFiles\\", "acDetailMismatch", 3, colNames);
+			String fileName1=ReadWriteXL.createFileName("D:\\TestDataFiles\\","acDetailMismatch");
+				
 
 				for(int m=1;m<=lastRow;m++){
-
+					String origin=ReadWriteXL.readXLData("D:\\TestDataFiles\\PtmBzRouteDate.xlsx", "BusRoutes",m,0);
 					String destination=ReadWriteXL.readXLData("D:\\TestDataFiles\\PtmBzRouteDate.xlsx", "BusRoutes",m,1);
 					String jrDate=ReadWriteXL.readXLData("D:\\TestDataFiles\\PtmBzRouteDate.xlsx", "BusRoutes",m,2);
 
@@ -40,18 +46,21 @@ public class TestAcFilter {
 					}else
 
 					{
+						driver=new FirefoxDriver();
+						
 						String url="https://paytm.com/bus-tickets/search/"+origin+"/"+destination+jrDate+"1";
+						//Runtime.getRuntime().exec("D:\\JojyDevasiaFolder\\AutoIT scripts\\HandleAuth.exe");
 						driver.get(url);
 						driver.manage().window().maximize();
 						driver.manage().timeouts().implicitlyWait(3,TimeUnit.SECONDS);
 						
-						if (driver.findElement(By.xpath("//div[@ng-controller='busTicketCheckoutCtrl']")).getText().contains("Seems like no bus journeys are available between")){
+						if (driver.findElement(By.xpath("//div[@ng-controller='busTicketCheckoutCtrl']")).getText().contains("Seems like no bus journeys are available")){
 							System.out.println(origin+" "+destination+"Has no trips");
 							continue;
 						}else
 						{
-							Thread.sleep(2000);
-							driver.findElement(By.xpath("//div/span[contains(text(),'With Air Conditioner')]")).click();
+							//Thread.sleep(2000);
+							//driver.findElement(By.xpath("//div/span[contains(text(),'With Air Conditioner')]")).click();
 							Thread.sleep(2000);
 							String dispOrigin=driver.findElement(By.xpath("//div[@class='detaShow']/span[1]")).getText();
 							String dispDestination=driver.findElement(By.xpath("//div[@class='detaShow']/span[2]")).getText();
@@ -86,9 +95,9 @@ public class TestAcFilter {
 									System.out.println("This trip has a detail mismatch\n ");
 									System.out.println("Count is : "+count);
 
-									ReadWriteXL.writeXLData("D:\\TestDataFiles\\acDetailMismatch.xlsx","MismatchDetail",count,0,""+ count+"");
-									ReadWriteXL.writeXLData("D:\\TestDataFiles\\acDetailMismatch.xlsx","MismatchDetail",count,1,routeInfo);
-									ReadWriteXL.writeXLData("D:\\TestDataFiles\\acDetailMismatch.xlsx","MismatchDetail",count,2,(bTxt+"\n"+tTxt));
+									ReadWriteXL.writeXLData(fileName1,"MismatchDetail",count,0,""+count+"");
+									ReadWriteXL.writeXLData(fileName1,"MismatchDetail",count,1,routeInfo);
+									ReadWriteXL.writeXLData(fileName1,"MismatchDetail",count,2,(bTxt+"\n"+tTxt));
 									count++;
 
 									System.out.println("\nRecord # : "+(i+1));
@@ -100,13 +109,15 @@ public class TestAcFilter {
 
 							}
 							System.out.println("\n\n________________\n Iteration completed");
+							
 
 						}
 						
 					}
+					driver.quit();
 
 				}
-			} 
+			//} 
 		}
 
 		catch (Exception e) {
