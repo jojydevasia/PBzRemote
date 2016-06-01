@@ -48,7 +48,7 @@ public class TestAcFilter {
 					{
 						driver=new FirefoxDriver();
 						
-						String url="https://paytm.com/bus-tickets/search/"+origin+"/"+destination+jrDate+"1";
+						String url="https://paytm.com/bus-tickets/search/"+origin+"/"+destination+jrDate;
 						//Runtime.getRuntime().exec("D:\\JojyDevasiaFolder\\AutoIT scripts\\HandleAuth.exe");
 						driver.get(url);
 						driver.manage().window().maximize();
@@ -59,8 +59,8 @@ public class TestAcFilter {
 							continue;
 						}else
 						{
-							//Thread.sleep(2000);
-							//driver.findElement(By.xpath("//div/span[contains(text(),'With Air Conditioner')]")).click();
+							Thread.sleep(2000);
+							driver.findElement(By.xpath("//div/span[contains(text(),'With Air Conditioner')]")).click();
 							Thread.sleep(2000);
 							String dispOrigin=driver.findElement(By.xpath("//div[@class='detaShow']/span[1]")).getText();
 							String dispDestination=driver.findElement(By.xpath("//div[@class='detaShow']/span[2]")).getText();
