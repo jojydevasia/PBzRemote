@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -41,10 +42,19 @@ public class TestClass {
 		//driver.findElement(By.xpath("//label[text()='Select Date']/following-sibling::input[1]")).click();
 		//System.out.println(driver.findElement(By.xpath("//div[@class='picker__header']")).getText());		
 		 PaytmBusHomePage pbhp=new PaytmBusHomePage(driver);
-		 //pbhp.openTravelCalendar();
-		 //pbhp.selectTravelDate("29", "July2016");
-		 //System.out.println((driver.findElement(By.xpath("//div[@class='picker__box']"))).isDisplayed());
-		 pbhp.clickTopRouteRecord("Bangalore to Chennai");
+		//pbhp.openTravelCalendar();
+		//pbhp.selectTravelDate("29", "July2016");
+		//System.out.println((driver.findElement(By.xpath("//div[@class='picker__box']"))).isDisplayed());
+		// pbhp.clickTopRouteRecord("Hyderabad to Guntur");
+		 
+		//pbhp.clickTopRouteBookButton("Chennai to Bangalore");
+		//List< String> x=pbhp.getTopRouteRecordText();
+		//for(String s:x){
+		//System.out.println("\n"+s);
+		//}
+		 
+		 
+		 
 	}
 	
 	

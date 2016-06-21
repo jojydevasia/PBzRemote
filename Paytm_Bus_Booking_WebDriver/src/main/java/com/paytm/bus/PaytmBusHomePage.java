@@ -1,5 +1,6 @@
 package com.paytm.bus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -24,8 +25,8 @@ public class PaytmBusHomePage {
 	By tomorrowButton=By.xpath("//button[@value='Tomorrow']");
 	By searchBusButton=By.xpath("//span[text()='Search Buses']");
 	By topRoutesHeader=By.xpath("//h2[Contains(text(),'Top Route')]");
-	By topRouteRecord=By.xpath("//ul/li[contains(@ng-repeat,'routeDetail in topRoute')]");
-	By topRouteBookButton=By.xpath("//ul/li[contains(@ng-repeat,'routeDetail in topRoute')]//button");	
+	By topRouteRecord=By.xpath("//ul/li[contains(@ng-repeat,'routeDetail in topRoute')]/a");
+	By topRouteBookButton=By.xpath("//ul/li[contains(@ng-repeat,'routeDetail in topRoute')]/a/following-sibling::span/button");	
 	
 	public String getPageTitle(){
 		return driver.getTitle();
@@ -107,19 +108,15 @@ public class PaytmBusHomePage {
 		return driver.findElement(topRoutesHeader).getText();
 	}
 	
-	public void clickTopRouteRecord(String routeInfo){
+	public void clickTopRouteRecord(String originToDest){
 		List<WebElement> topRouteRecords=driver.findElements(topRouteRecord);
 		for(int i=0;i<topRouteRecords.size();i++){
-			String x=topRouteRecords.get(i).getText();
-			System.out.println(x);
-			if(x.toLowerCase().matches(routeInfo)){
-				System.out.println("Found a match");
-				WebElement record=topRouteRecords.get(i).findElement(By.xpath("//button"));
-				System.out.println(record.getText());
+			WebElement topRec=topRouteRecords.get(i);
+			String routeText=topRouteRecords.get(i).getText();
+			if(routeText.contains(originToDest)){
+				WebElement record=(topRouteRecords.get(i)).findElement(By.xpath("a"));
 				record.click();
 				break;
-			}else{
-				System.out.println("No match");
 			}
 		}
 		
@@ -128,7 +125,7 @@ public class PaytmBusHomePage {
 	
 	public List<String> getTopRouteRecordText(){
 		List<WebElement> topRouteRecords=driver.findElements(topRouteRecord);
-		List<String> topRouteText = null;
+		List<String> topRouteText = new ArrayList<String>() ;
 		for(WebElement w:topRouteRecords){
 			topRouteText.add(w.getText());
 		}
@@ -136,8 +133,15 @@ public class PaytmBusHomePage {
 	}
 	
 	
-	public void clickTopRouteBookButton(String from, String to){
-		driver.findElement(topRouteBookButton).click();
+	public void clickTopRouteBookButton(String originToDest){
+		String o2D=originToDest;
+		String topRouteXpath="//ul/li[contains(@ng-repeat,'routeDetail in topRoute')]/a[text()='"+ o2D + "']/following-sibling::span/button";
+		try{
+		driver.findElement(By.xpath(topRouteXpath)).click();
+		System.out.println("clicked");
+		} catch(Exception e){
+			System.out.println( "Element  not found");
+		}
 	}
 	
 	
