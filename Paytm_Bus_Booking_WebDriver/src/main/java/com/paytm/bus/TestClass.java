@@ -32,7 +32,8 @@ public class TestClass {
 		WebDriver driver= new ChromeDriver();
 		
 		
-		driver.get("https://paytm.com/bus-tickets");
+		driver.get("https://paytm.com/bus-tickets/search/Chennai/Kozhikode/2016-06-29");
+		driver.manage().window().maximize();
 		System.out.println(driver.getTitle());
 		//System.out.println(driver.findElement(By.xpath("//i[contains(@ng-click,'swapStartDestination')]")).getTagName());
 		//System.out.println(driver.findElement(By.xpath("//div[contains(@ng-click,'clearOriginSearch')]//i")));
@@ -41,7 +42,7 @@ public class TestClass {
 		//System.out.println(driver.findElement(By.xpath("//ul[1]/li[contains(@ng-repeat,'routeDetail in topRoute')]//button")).getText());
 		//driver.findElement(By.xpath("//label[text()='Select Date']/following-sibling::input[1]")).click();
 		//System.out.println(driver.findElement(By.xpath("//div[@class='picker__header']")).getText());		
-		 PaytmBusHomePage pbhp=new PaytmBusHomePage(driver);
+		 //PaytmBusHomePage pbhp=new PaytmBusHomePage(driver);
 		//pbhp.openTravelCalendar();
 		//pbhp.selectTravelDate("29", "July2016");
 		//System.out.println((driver.findElement(By.xpath("//div[@class='picker__box']"))).isDisplayed());
@@ -53,8 +54,35 @@ public class TestClass {
 		//System.out.println("\n"+s);
 		//}
 		 
+		 PaytmBusListPage pbp=new PaytmBusListPage(driver);
 		 
+		 //System.out.println(driver.findElement(pbp.refineFilterChkBox).getText()+"\n==============\n");
+		 //driver.findElement(pbp.refineFilterChkBox).click();
+		 //System.out.println(driver.findElement(pbp.clrOneFilter).getText()+"\n==============\n");
+		 //System.out.println(driver.findElement(pbp.clrAllFilterButton).getText()+"\n==============\n");
+		 //driver.findElement(pbp.clrOneFilter).click();
+		 //Thread.sleep(2000);
+		 //System.out.println(driver.findElement(pbp.modifySearchButton).getText()+"\n==============\n");
+		 //driver.findElement(pbp.modifySearchButton).click();
+		 //Thread.sleep(2000);
+		 //System.out.println(driver.findElement(pbp.modifySearchButton).getText()+"\n==============\n");
+		 //System.out.println(driver.findElement(pbp.newOrigin).getText()+"\n==============\n");
+		 //System.out.println(driver.findElement(pbp.newDestination).getText()+"\n==============\n");
+		 //System.out.println(driver.findElement(pbp.newTravelDate).getText()+"\n==============\n");
+		 //System.out.println(driver.findElement(pbp.modifySearchCloseBtn)+"\n===========\n");
+		 //Thread.sleep(3000);
+		// driver.findElement(pbp.modifySearchCloseBtn).click();
+		// System.out.println(driver.findElement(pbp.minPriceSlider)+"\n===========\n");
+		// System.out.println(driver.findElement(pbp.maxPriceSlider)+"\n===========\n");
+		 //System.out.println(driver.findElement(pbp.minTimeSlider)+"\n===========\n");
+		 //System.out.println(driver.findElement(pbp.maxTimeSlider)+"\n===========\n");
+		 //System.out.println(driver.findElement(pbp.boardPointSearchIcon)+"\n===========\n");
+		 //System.out.println(driver.findElement(pbp.dropPointSearchIcon)+"\n===========\n");
+		 //System.out.println(driver.findElement(pbp.operatorSearchIcon)+"\n===========\n");
 		 
+		 pbp.scrolMinPriceSlider();
+		 
+		 pbp.scrolMaxPriceSlider();
 	}
 	
 	
