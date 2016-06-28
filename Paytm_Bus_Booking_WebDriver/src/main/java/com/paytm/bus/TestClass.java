@@ -32,9 +32,9 @@ public class TestClass {
 		WebDriver driver= new ChromeDriver();
 		
 		
-		driver.get("https://paytm.com/bus-tickets/search/Chennai/Kozhikode/2016-06-29");
+		driver.get("https://paytm.com/bus-tickets/search/Bangalore/Kozhikode/2016-06-29");
 		driver.manage().window().maximize();
-		System.out.println(driver.getTitle());
+		//System.out.println(driver.getTitle());
 		//System.out.println(driver.findElement(By.xpath("//i[contains(@ng-click,'swapStartDestination')]")).getTagName());
 		//System.out.println(driver.findElement(By.xpath("//div[contains(@ng-click,'clearOriginSearch')]//i")));
 		//System.out.println(driver.findElement(By.xpath("//div[contains(@ng-click,'clearDestinationSearch')]//i")));
@@ -57,7 +57,7 @@ public class TestClass {
 		 PaytmBusListPage pbp=new PaytmBusListPage(driver);
 		 
 		 //System.out.println(driver.findElement(pbp.refineFilterChkBox).getText()+"\n==============\n");
-		 //driver.findElement(pbp.refineFilterChkBox).click();
+		// driver.findElement(pbp.refineFilterChkBox).click();
 		 //System.out.println(driver.findElement(pbp.clrOneFilter).getText()+"\n==============\n");
 		 //System.out.println(driver.findElement(pbp.clrAllFilterButton).getText()+"\n==============\n");
 		 //driver.findElement(pbp.clrOneFilter).click();
@@ -80,9 +80,25 @@ public class TestClass {
 		 //System.out.println(driver.findElement(pbp.dropPointSearchIcon)+"\n===========\n");
 		 //System.out.println(driver.findElement(pbp.operatorSearchIcon)+"\n===========\n");
 		 
-		 pbp.scrolMinPriceSlider();
+		 //System.out.println("Min Price Before= "+pbp.getMinPrice() );
+		 //pbp.scrolMinPriceSlider();
+		 //System.out.println("Min Price After= "+pbp.getMinPrice() );
 		 
-		 pbp.scrolMaxPriceSlider();
+		 
+		 //pbp.scrolMaxPriceSlider();
+		 
+		 //pbp.scrolMinTimeSlider();
+		 
+		 //pbp.scrolMaxTimeSlider();
+		 //System.out.println(pbp.getTotalBusCount());
+		 //System.out.println(pbp.getDispBusCount());
+		 //System.out.println(pbp.getOriginText());
+		 //System.out.println(pbp.getDestinationText());
+		 pbp.selectSeats(1);
+		 pbp.selectBordingPointByIndex(2);
+		 pbp.clickProceedToPayBtn();
+		 
+		 
 	}
 	
 	
