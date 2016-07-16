@@ -104,7 +104,7 @@ public static void main(String[] args)throws IOException, InterruptedException {
 	//Assert.assertTrue(busListMsg.contains("Bangalore to goa"), "Wrong route in response. Test Failed");
 	String busDetails=driver.findElement(By.xpath("//div[@class='bus-ticket-container'][2]")).getText();
 	System.out.println(busDetails); */
-	List<WebElement> busRecord=driver.findElements(By.xpath("//div[@class='bus-ticket-container']"));
+	List<WebElement> busRecord=driver.findElements(By.xpath("//div[@ng-show='bus.isBusShown'  and @aria-hidden='false']"));
 	
 	for(int j=1;j<=busRecord.size();j++){
 		String seatMsg=(busRecord.get(j).findElement(By.className("seatsAvailable"))).getText();
@@ -121,7 +121,7 @@ public static void main(String[] args)throws IOException, InterruptedException {
 				System.out.println("Seats Selected:  "+selSeats);
 				//To select the boarding point open the list
 				driver.findElement(By.xpath("//md-select[@ng-model='boardingPoint']")).click();
-				//print content in list
+				//print content in boarding-point list
 				System.out.println(driver.findElement(By.className("md-text")).getText()); 
 				//getContents of list
 				List<WebElement> bordPoint=driver.findElements(By.className("md-text"));
@@ -137,9 +137,6 @@ public static void main(String[] args)throws IOException, InterruptedException {
 			 }
 		}
 	}
-	
-	
-	
 	
 	
 	Thread.sleep(10000);
