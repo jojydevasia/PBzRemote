@@ -119,11 +119,38 @@ public class PaytmBusListPage {
 		return driver.findElement(busTripNameTxt).getText();
 	}
 	
-	public String getDepartureTimeText(){
+	public String getDepartureTime(){
 		return driver.findElement(departureTimeTxt).getText();
 	}
 	
-	public String getArrival
+	public String getArrivalTimeText(){
+		return driver.findElement(arrivalTimeTxt).getText();
+	}
+	
+	public String getTripDuration(){
+		return driver.findElement(durationTxt).getText();
+	}
+	
+	
+	public int getTicketPrice(){
+		String tempPrice=(driver.findElement(priceTxt).getText()).split("Rs.")[1];
+		return Integer.parseInt(tempPrice.trim());
+	}
+	
+	public int getNumSeatsAvailable(){
+		String seatMsg=(driver.findElement(seatsAvailableTxt)).getText();
+		String[] msgSplit=seatMsg.split(":");
+		return Integer.parseInt(msgSplit[1].trim());
+	}
+	
+	boolean isMTicketAvailable(){
+		List<WebElement> busRecordList=driver.findElements(busRecord);
+		for(int j=0;j<=busRecordList.size();j++){
+			return (busRecordList.get(j).findElement(mTicketIcon)).isDisplayed();
+		}
+	}
+	
+	
 	
 	
 	
