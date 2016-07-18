@@ -18,6 +18,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -32,7 +33,7 @@ public class TestClass {
 		WebDriver driver= new ChromeDriver();
 		
 		
-		driver.get("https://paytm.com/bus-tickets/search/Bangalore/Kozhikode/2016-06-29");
+		driver.get("https://paytm.com/bus-tickets/search/Bangalore/Kozhikode/2016-07-29");
 		driver.manage().window().maximize();
 		//System.out.println(driver.getTitle());
 		//System.out.println(driver.findElement(By.xpath("//i[contains(@ng-click,'swapStartDestination')]")).getTagName());
@@ -97,6 +98,20 @@ public class TestClass {
 		 pbp.selectSeats(1);
 		 pbp.selectBordingPointByIndex(2);
 		 pbp.clickProceedToPayBtn();
+		 //Login Process
+		 String uid=ReadWriteXL.readXLData("D:\\TestDataFiles\\PTMBz Test Data.xlsx","Login", 1,0);
+			String pwd=ReadWriteXL.readXLData("D:\\TestDataFiles\\PTMBz Test Data.xlsx","Login", 1,1);
+		 
+			Thread.sleep(10000);
+			WebElement fr=driver.findElement(By.xpath("//*[@ng-hide='showVerificationScreen']")); 
+			driver.switchTo().frame(fr);
+			String fTitl=driver.getTitle();
+			System.out.println("FrameTitle : "+fTitl);
+			System.out.println("Text 4 Frame: ");
+			System.out.println(driver.findElement(By.xpath("//*[@id='wallet-container-new']/ul")).getText());
+			driver.findElement(By.xpath("//input[@id='input_0']")).sendKeys(uid);
+			driver.findElement(By.cssSelector("#input_1")).sendKeys(pwd);
+			driver.findElement(By.xpath("//button[@type='submit']")).click();
 		 
 		 
 	}

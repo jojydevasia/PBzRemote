@@ -67,6 +67,8 @@ public class PaytmBusHomePage {
 		driver.findElement(travelDateCalendar).click();
 	}
 	
+	
+	
 	public void selectTravelDate(String day,String monthYear) throws Exception{
 		
 		String trvMonth_Year=driver.findElement(By.xpath("//div[@class='picker__header']")).getText();
@@ -88,17 +90,20 @@ public class PaytmBusHomePage {
 			Thread.sleep(1000);
 			selectTravelDate(day,monthYear);
 		}
-		
 	}
+	
+	
 	
 	
 	public void selectTodaysDate(){
 		driver.findElement(todayButton).click();
 	}
 	
+	
 	public void selectTomorrowsDate(){
 		driver.findElement(tomorrowButton).click();
 	}
+	
 	
 	public void clickSearchButton(){
 		driver.findElement(searchBusButton).click();

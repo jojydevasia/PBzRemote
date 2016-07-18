@@ -143,11 +143,19 @@ public class PaytmBusListPage {
 		return Integer.parseInt(msgSplit[1].trim());
 	}
 	
-	boolean isMTicketAvailable(){
+	public boolean isMTicketAvailable(){
 		List<WebElement> busRecordList=driver.findElements(busRecord);
 		for(int j=0;j<=busRecordList.size();j++){
-			return (busRecordList.get(j).findElement(mTicketIcon)).isDisplayed();
+			try{
+			 if((busRecordList.get(j).findElement(mTicketIcon)).isDisplayed()){
+				 return true;
+			 }
+			}
+			catch(Exception e){	
+				return false;
+			}
 		}
+		return false;
 	}
 	
 	
@@ -204,7 +212,7 @@ public class PaytmBusListPage {
 			if(numSeatAvl>0){
 				driver.findElement(selectSeatButton).click();
 			//  in seat selection panel
-				Thread.sleep(4000);
+				Thread.sleep(6000);
 				List<WebElement> avlSeats=driver.findElements(By.xpath("//a/div[@class='square2 available' or @class='square available']"));
 				System.out.println("AvlSeat List Size: "+avlSeats.size());
 				if(avlSeats.size()>=reqSeats){
