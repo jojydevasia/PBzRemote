@@ -68,20 +68,20 @@ public class PaytmBusPassengerDetailPage {
 				JavascriptExecutor js= (JavascriptExecutor)driver;
 				js.executeScript("window.scrollBy(0,20)","");
 				
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 				driver.findElement(By.xpath("(//md-select[@role='combobox' and @aria-label='Title'])["+k+"]")).click();
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 				driver.findElement(By.xpath("//md-option/div[text()='"+psngrTitle+"']")).click();
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 				driver.findElement(By.xpath("(//input[@ng-model='seat.name'])["+k+"]")).clear();
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 				driver.findElement(By.xpath("(//input[@ng-model='seat.name'])["+k+"]")).sendKeys(psngrName);
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 				driver.findElement(By.xpath("(//md-select[@aria-label='Age'])["+k+"]")).click();
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 				driver.findElement(By.xpath("//md-option/div[text()='"+psngrAge+"']")).click();
 				
-				Thread.sleep(5000);
+				Thread.sleep(3000);
 			
 			}catch(IOException e1){
 				System.out.println("Issue with reading data from source");
@@ -89,6 +89,80 @@ public class PaytmBusPassengerDetailPage {
 				e2.printStackTrace();
 			}
 		}
+	}
+	
+	
+	public String getContactMobileNum(){
+		return driver.findElement(contactMobileInputBox).getText();
+	}
+	
+	public void setContactMobileNum(){
+		driver.findElement(contactMobileInputBox).clear();
+		driver.findElement(contactMobileInputBox).sendKeys("9900507607");
+	}
+	
+	public String getContactEmail(){
+		return driver.findElement(contactEmailInputBox).getText();
+	}
+	
+	public void setContactEmail(){
+		driver.findElement(contactEmailInputBox).clear();
+		driver.findElement(contactEmailInputBox).sendKeys("myemailid@example.com");
+	}
+	
+	public void clickAgreeCheckBox(){
+		driver.findElement(agreeCheckBox).click();
+	}
+	
+	public String getBookingDetailsHeader(){
+		return driver.findElement(bookingDetailsHeader).getText();
+	}
+	
+	public String getDepartureCityName(){
+		return driver.findElement(departureCityName).getText();
+	}
+	
+	public String getArrivalCityName(){
+		return driver.findElement(arrivalCityName).getText();
+	}
+	
+	public String getOperatorName(){
+		return driver.findElement(operatorName).getText();
+	}
+	
+	public String getBusType(){
+		return driver.findElement(busTypeText).getText();
+	}
+	
+	public String getBoardingTime(){
+		return driver.findElement(boardingTimeText).getText();
+	}
+	
+	public String[] getSeatNumbers(){
+		String seatText=driver.findElement(seatNumberText).getText();
+		return seatText.split(",");
+	}
+	
+	public String getBoardingPoint(){
+		return driver.findElement(boardingPointText).getText();
+	}
+	
+	public int getTotalFare(){
+		String fareText=driver.findElement(totalFareText).getText();
+		String[] temp=fareText.split("Rs ");
+		String temp1=(temp[1].trim()).replace(",","");
+		return Integer.parseInt(temp1);
+	}
+	
+	public int getFareOnPayButton(){
+		String fareText=driver.findElement(proceedToPayButton).getText();
+		String[] temp=fareText.split("Rs ");
+		String temp1=(temp[1].trim()).replace(",","");
+		return Integer.parseInt(temp1);
+	}
+	
+	public void clickProceedToPayButton(){
+		driver.findElement(proceedToPayButton);
 	}
 	
 }
