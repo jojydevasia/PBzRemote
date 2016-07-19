@@ -31,7 +31,7 @@ public class TestClass {
 		System.out.println("done: file created");  (This block creates a new file by calling t*he method in ReadWriteXL.java  */
 		System.setProperty("webdriver.chrome.driver", "D:\\JojyDevasiaFolder\\Automation sw Lib\\chromedriver\\chromedriver.exe");
 		WebDriver driver= new ChromeDriver();
-		int reqSeats=1;
+		int reqSeats=2;
 		
 		driver.get("https://paytm.com/bus-tickets/search/Bangalore/Chennai/2016-08-07");
 		driver.manage().window().maximize();
@@ -119,6 +119,14 @@ public class TestClass {
 			
 			System.out.println("******"+pdp.passengerPageTitle+"******");
 			pdp.setPassengerDetails(reqSeats);
+			System.out.println("Mob No : "+pdp.getContactMobileNum());
+			pdp.setContactMobileNum("9911991199");
+			System.out.println("Email : "+pdp.getContactEmail());
+			pdp.setContactEmail("Hello@example.com");
+			pdp.clickAgreeCheckBox();
+			System.out.println("Boooking Head : "+pdp.getBookingDetailsHeader());
+			System.out.println("SeatNumbers : "+pdp.getSeatNumbers());
+			
 		
 		 
 		 

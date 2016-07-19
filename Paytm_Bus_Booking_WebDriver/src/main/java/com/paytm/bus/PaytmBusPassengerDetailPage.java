@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 
 
 public class PaytmBusPassengerDetailPage {
@@ -37,7 +38,7 @@ public class PaytmBusPassengerDetailPage {
 	By totalFareText=By.cssSelector("div.left+div"); //xpath( //div[contains(text(),'Total Fare')]/following-sibling::div	 )
 	By proceedToPayButton=By.cssSelector("button>span:contains('Proceed to Pay')");  //xpath ( //button/span[contains(text(),'Proceed to Pay')] )
 	By cancellationPolicyLink=By.cssSelector("a:contains('Cancellation Policy')");  //xpath ( //a[contains(text(),'Cancellation Policy')] )
-	By TnCLink=	By.cssSelector("a:contains('Terms and Conditions')"); //  xpath( //a[contains(text(),'Terms and Conditions')] )
+	By termsLink=	By.cssSelector("a:contains('Terms and Conditions')"); //  xpath( //a[contains(text(),'Terms and Conditions')] )
 	By promoCodeLink=By.cssSelector("div.'promo'>a:contains('Promo Code')");  //xpath ( //div[@class='promo']/a[contains(text(),'Promo Code')] )
 	By promoCodeInputBox=By.cssSelector("input[ng-model='promoCode']"); //xpath ( //input[@ng-model='promoCode'] )
 	
@@ -96,18 +97,18 @@ public class PaytmBusPassengerDetailPage {
 		return driver.findElement(contactMobileInputBox).getText();
 	}
 	
-	public void setContactMobileNum(){
+	public void setContactMobileNum(String mobileNum){
 		driver.findElement(contactMobileInputBox).clear();
-		driver.findElement(contactMobileInputBox).sendKeys("9900507607");
+		driver.findElement(contactMobileInputBox).sendKeys(mobileNum);
 	}
 	
 	public String getContactEmail(){
 		return driver.findElement(contactEmailInputBox).getText();
 	}
 	
-	public void setContactEmail(){
+	public void setContactEmail(String emailId){
 		driver.findElement(contactEmailInputBox).clear();
-		driver.findElement(contactEmailInputBox).sendKeys("myemailid@example.com");
+		driver.findElement(contactEmailInputBox).sendKeys(emailId);
 	}
 	
 	public void clickAgreeCheckBox(){
@@ -163,6 +164,21 @@ public class PaytmBusPassengerDetailPage {
 	
 	public void clickProceedToPayButton(){
 		driver.findElement(proceedToPayButton);
+	}
+	
+	public void readCancellationPolicy(){
+		Actions act=new Actions(driver);
+		act.moveToElement(driver.findElement(cancellationPolicyLink)).build().perform();
+	}
+	
+	public void clickTnCLink(){
+		driver.findElement(termsLink).click();
+	}
+	
+	public void enterPromoCode() throws InterruptedException{
+		driver.findElement(promoCodeLink).click();
+		Thread.sleep(2000);
+		driver.findElement(promoCodeInputBox).sendKeys("Bus150");
 	}
 	
 }
