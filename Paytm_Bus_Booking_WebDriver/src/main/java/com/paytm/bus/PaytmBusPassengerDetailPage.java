@@ -64,22 +64,25 @@ public class PaytmBusPassengerDetailPage {
 				String psngrTitle=ReadWriteXL.readXLData("D:\\TestDataFiles\\PTMBz Test Data.xlsx","Passengers", k,0);
 				String psngrName=ReadWriteXL.readXLData("D:\\TestDataFiles\\PTMBz Test Data.xlsx","Passengers", k,1);
 				String psngrAge=ReadWriteXL.readXLData("D:\\TestDataFiles\\PTMBz Test Data.xlsx","Passengers", k,2);
-			driver.findElement(By.xpath("(//md-select[@role='combobox' and @aria-label='Title'])["+k+"]")).click();
-			Thread.sleep(2000);
-			driver.findElement(By.xpath("//md-option/div[text()='"+psngrTitle+"']")).click();
-			Thread.sleep(2000);
-			driver.findElement(By.xpath("(//input[@ng-model='seat.name'])["+k+"]")).clear();
-			Thread.sleep(2000);
-			driver.findElement(By.xpath("(//input[@ng-model='seat.name'])["+k+"]")).sendKeys(psngrName);
-			Thread.sleep(2000);
-			driver.findElement(By.xpath("(//md-select[@aria-label='Age'])["+k+"]")).click();
-			Thread.sleep(2000);
-			driver.findElement(By.xpath("//md-option/div[text()='"+psngrAge+"']")).click();
+				
+				JavascriptExecutor js= (JavascriptExecutor)driver;
+				js.executeScript("window.scrollBy(0,20)","");
+				
+				Thread.sleep(2000);
+				driver.findElement(By.xpath("(//md-select[@role='combobox' and @aria-label='Title'])["+k+"]")).click();
+				Thread.sleep(2000);
+				driver.findElement(By.xpath("//md-option/div[text()='"+psngrTitle+"']")).click();
+				Thread.sleep(2000);
+				driver.findElement(By.xpath("(//input[@ng-model='seat.name'])["+k+"]")).clear();
+				Thread.sleep(2000);
+				driver.findElement(By.xpath("(//input[@ng-model='seat.name'])["+k+"]")).sendKeys(psngrName);
+				Thread.sleep(2000);
+				driver.findElement(By.xpath("(//md-select[@aria-label='Age'])["+k+"]")).click();
+				Thread.sleep(2000);
+				driver.findElement(By.xpath("//md-option/div[text()='"+psngrAge+"']")).click();
+				
+				Thread.sleep(5000);
 			
-			JavascriptExecutor js= (JavascriptExecutor)driver;
-			js.executeScript("window.scrollBy(0,20)","");
-			
-			Thread.sleep(5000);
 			}catch(IOException e1){
 				System.out.println("Issue with reading data from source");
 			}catch(Exception e2){
