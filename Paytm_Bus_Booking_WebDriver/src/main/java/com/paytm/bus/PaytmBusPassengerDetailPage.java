@@ -1,21 +1,27 @@
 package com.paytm.bus;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+
 
 public class PaytmBusPassengerDetailPage {
 	
 	WebDriver driver;
-	String passengerPageTitle;
-	
+	String passengerPageTitle=null;
+	int i=0;
+	public String k;
 	By passengerDetailHeaderText=By.cssSelector(".passengerDetails>h1:contains('Passenger')");
 	By seatNumHeaderText=By.cssSelector(".seatName");
-	By titleListBox=By.cssSelector("[aria-label='Title']:nth(0)"); //xpath( (//md-select[@role='combobox' and @aria-label='Title'])[1] )
-	By titleMrOption=By.cssSelector("md-option>div:contains(Mr)"); //xpath(  //md-option/div[text()='Mr'] )  
-	By titleMsOption=By.cssSelector("md-option>div:contains(Ms)"); //xpath( //md-option/div[text()='Ms'])
-	By passengerName=By.cssSelector("input[ng-model='seat.name']:nth(0)");//xpath((//input[@ng-model='seat.name'])[1])
-	By passengerAgeListBox=By.cssSelector("md-select[aria-label='Age']:nth(0)");//xpath ( (//md-select[@aria-label='Age'])[1] )
-	By ageOption=By.cssSelector("md-option>div:contains('37')"); //xpath ( //md-option/div[text()='37']  )
+	By titleListBox=By.xpath("//md-select[@role='combobox' and @aria-label='Title'][("+i+1+")]");  //cssSelector("[aria-label='Title']"/*:nth('"+k+"')*/); 
+	By titleMrOption=By.xpath("//md-option/div[text()='Mr']");   //cssSelector("md-option>div:contains(Mr)");
+	By titleMsOption=By.xpath("//md-option/div[text()='Ms']");   //cssSelector("md-option>div:contains(Ms)"); 
+	By passengerName=By.xpath("//input[@ng-model='seat.name'][("+i+1+")]");  //cssSelector("input[ng-model='seat.name']"/*:nth(0)"*/)
+	By passengerAgeListBox=By.xpath("//md-select[@aria-label='Age'][("+i+1+")]");   //cssSelector("md-select[aria-label='Age']"/*:nth(0)"*/)
+	By ageOption=By.xpath("//md-option/div[text()='37']"); //cssSelector("md-option>div:contains('37')");
 	By contactMobileInputBox=By.cssSelector("input[ng-model='phoneNumber']"); //xpath ( //input[@ng-model='phoneNumber']  )
 	By contactEmailInputBox=By.cssSelector("input[ng-model='emailAddress']"); //xpath (//input[@ng-model='emailAddress'] 
 	By agreeCheckBox=By.cssSelector("div.md-container"); //xpath( //div[@class='md-container']
@@ -34,4 +40,52 @@ public class PaytmBusPassengerDetailPage {
 	By TnCLink=	By.cssSelector("a:contains('Terms and Conditions')"); //  xpath( //a[contains(text(),'Terms and Conditions')] )
 	By promoCodeLink=By.cssSelector("div.'promo'>a:contains('Promo Code')");  //xpath ( //div[@class='promo']/a[contains(text(),'Promo Code')] )
 	By promoCodeInputBox=By.cssSelector("input[ng-model='promoCode']"); //xpath ( //input[@ng-model='promoCode'] )
+	
+	
+	
+	public PaytmBusPassengerDetailPage(WebDriver driver){
+		this.driver=driver;
+		passengerPageTitle=getPageTitle();
+	}
+	
+	public String getPageTitle(){
+		return driver.getTitle();
+	}
+	
+	
+	public String getPassengerDetailHeader(){
+		return driver.findElement(passengerDetailHeaderText).getText();
+	}
+	
+	public void setPassengerDetails(int reqSeats){
+		for(int i=0;i<reqSeats;i++){
+			int k=i+1;
+			try{
+				String psngrTitle=ReadWriteXL.readXLData("D:\\TestDataFiles\\PTMBz Test Data.xlsx","Passengers", k,0);
+				String psngrName=ReadWriteXL.readXLData("D:\\TestDataFiles\\PTMBz Test Data.xlsx","Passengers", k,1);
+				String psngrAge=ReadWriteXL.readXLData("D:\\TestDataFiles\\PTMBz Test Data.xlsx","Passengers", k,2);
+			driver.findElement(By.xpath("(//md-select[@role='combobox' and @aria-label='Title'])["+k+"]")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//md-option/div[text()='"+psngrTitle+"']")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("(//input[@ng-model='seat.name'])["+k+"]")).clear();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("(//input[@ng-model='seat.name'])["+k+"]")).sendKeys(psngrName);
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("(//md-select[@aria-label='Age'])["+k+"]")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("//md-option/div[text()='"+psngrAge+"']")).click();
+			
+			JavascriptExecutor js= (JavascriptExecutor)driver;
+			js.executeScript("window.scrollBy(0,20)","");
+			
+			Thread.sleep(5000);
+			}catch(IOException e1){
+				System.out.println("Issue with reading data from source");
+			}catch(Exception e2){
+				e2.printStackTrace();
+			}
+		}
+	}
+	
 }

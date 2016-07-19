@@ -33,7 +33,7 @@ public class TestClass {
 		WebDriver driver= new ChromeDriver();
 		
 		
-		driver.get("https://paytm.com/bus-tickets/search/Bangalore/Kozhikode/2016-07-29");
+		driver.get("https://paytm.com/bus-tickets/search/Bangalore/Chennai/2016-08-07");
 		driver.manage().window().maximize();
 		//System.out.println(driver.getTitle());
 		//System.out.println(driver.findElement(By.xpath("//i[contains(@ng-click,'swapStartDestination')]")).getTagName());
@@ -56,6 +56,8 @@ public class TestClass {
 		//}
 		 
 		 PaytmBusListPage pbp=new PaytmBusListPage(driver);
+		 
+		 Thread.sleep(3000);
 		 
 		 //System.out.println(driver.findElement(pbp.refineFilterChkBox).getText()+"\n==============\n");
 		// driver.findElement(pbp.refineFilterChkBox).click();
@@ -95,7 +97,7 @@ public class TestClass {
 		 //System.out.println(pbp.getDispBusCount());
 		 //System.out.println(pbp.getOriginText());
 		 //System.out.println(pbp.getDestinationText());
-		 pbp.selectSeats(1);
+		 pbp.selectSeats(5);
 		 pbp.selectBordingPointByIndex(2);
 		 pbp.clickProceedToPayBtn();
 		 //Login Process
@@ -112,6 +114,12 @@ public class TestClass {
 			driver.findElement(By.xpath("//input[@id='input_0']")).sendKeys(uid);
 			driver.findElement(By.cssSelector("#input_1")).sendKeys(pwd);
 			driver.findElement(By.xpath("//button[@type='submit']")).click();
+			Thread.sleep(80000);
+			PaytmBusPassengerDetailPage pdp=new PaytmBusPassengerDetailPage(driver);
+			
+			System.out.println("******"+pdp.passengerPageTitle+"******");
+			pdp.setPassengerDetails(5);
+			
 		 
 		 
 	}
