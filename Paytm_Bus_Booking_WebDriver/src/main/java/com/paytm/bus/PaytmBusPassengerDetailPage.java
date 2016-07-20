@@ -27,20 +27,20 @@ public class PaytmBusPassengerDetailPage {
 	By contactEmailInputBox=By.cssSelector("input[ng-model='emailAddress']"); //xpath (//input[@ng-model='emailAddress'] 
 	By agreeCheckBox=By.cssSelector("div.md-container"); //xpath( //div[@class='md-container']
 	
-	By bookingDetailsHeader=By.cssSelector("h1:contains('Booking Details')"); //xpath( //h1[text()='Booking Details'])
-	By departureCityName=By.cssSelector("h5:contains('Departure')+p");  //xpath( //li/h5[contains(text(),'Departure')]/following-sibling::p )
-	By arrivalCityName=By.cssSelector("h5:contains('Arrival')+p");  //xpath( //li/h5[contains(text(),'Arrival')]/following-sibling::p )
-	By operatorName=By.cssSelector("li>div:contains('Bus Operator')+div"); //xpath( //div[text()='Bus Operator']/following-sibling::div )
-	By busTypeText=By.cssSelector("li>div:contains('Bus Type')+div"); //xpath( //li/div[text()='Bus Type']/following-sibling::div )
-	By boardingTimeText=By.cssSelector("li>div:contains('Boarding Time')+div"); //xpath ( //li/div[text()='Boarding Time']/following-sibling::div )
-	By seatNumberText=By.cssSelector("li>div:contains('Seats Number')+div"); // xpath ( //li/div[contains(text(),'Seat')]/following-sibling::div )
-	By boardingPointText=By.cssSelector("li>div:contains('Boarding Point')+div");  //xpath ( //li/div[text()='Boarding Point']/following-sibling::div )
-	By totalFareText=By.cssSelector("div.left+div"); //xpath( //div[contains(text(),'Total Fare')]/following-sibling::div	 )
-	By proceedToPayButton=By.cssSelector("button>span:contains('Proceed to Pay')");  //xpath ( //button/span[contains(text(),'Proceed to Pay')] )
-	By cancellationPolicyLink=By.cssSelector("a:contains('Cancellation Policy')");  //xpath ( //a[contains(text(),'Cancellation Policy')] )
-	By termsLink=	By.cssSelector("a:contains('Terms and Conditions')"); //  xpath( //a[contains(text(),'Terms and Conditions')] )
-	By promoCodeLink=By.cssSelector("div.'promo'>a:contains('Promo Code')");  //xpath ( //div[@class='promo']/a[contains(text(),'Promo Code')] )
-	By promoCodeInputBox=By.cssSelector("input[ng-model='promoCode']"); //xpath ( //input[@ng-model='promoCode'] )
+	By bookingDetailsHeader=By.cssSelector("div.bookingDetails>div.Detailscart>h1");    //xpath( //h1[text()='Booking Details'])
+	By departureCityName=By.xpath("//li/h5[contains(text(),'Departure')]/following-sibling::p");     // cssSelector("h5:contains('Departure')+p");  
+	By arrivalCityName=By.xpath("//li/h5[contains(text(),'Arrival')]/following-sibling::p");      // cssSelector("h5:contains('Arrival')+p");  
+	By operatorName=By.xpath("//div[text()='Bus Operator']/following-sibling::div");     //cssSelector("li>div:contains('Bus Operator')+div");
+	By busTypeText=By.xpath("//li/div[text()='Bus Type']/following-sibling::div");     //cssSelector("li>div:contains('Bus Type')+div"); 
+	By boardingTimeText=By.xpath("//li/div[text()='Boarding Time']/following-sibling::div");   //cssSelector("li>div:contains('Boarding Time')+div");
+	By seatNumberText=By.xpath("//li/div[contains(text(),'Seat')]/following-sibling::div");   //cssSelector("li>div:contains('Seats Number')+div");
+	By boardingPointText=By.xpath ("//li/div[text()='Boarding Point']/following-sibling::div");   //cssSelector("li>div:contains('Boarding Point')+div");
+	By totalFareText=By.xpath("//div[contains(text(),'Total Fare')]/following-sibling::div");   //cssSelector("div.left+div"); 
+	By proceedToPayButton=By.xpath("//button/span[contains(text(),'Proceed to Pay')]");   //cssSelector("button>span:contains('Proceed to Pay')");
+	By cancellationPolicyLink=By.xpath("//a[contains(text(),'Cancellation Policy')]");   //cssSelector("a:contains('Cancellation Policy')");  
+	By termsLink=	By.xpath("//a[contains(text(),'Terms and Conditions')]");    //cssSelector("a:contains('Terms and Conditions')"); //  
+	By promoCodeLink=By.xpath("//div[@class='promo']/a[contains(text(),'Promo Code')]");   //cssSelector("div.'promo'>a:contains('Promo Code')");  
+	By promoCodeInputBox=By.xpath("//input[@ng-model='promoCode']");   //cssSelector("input[ng-model='promoCode']"); 
 	
 	
 	
@@ -175,10 +175,10 @@ public class PaytmBusPassengerDetailPage {
 		driver.findElement(termsLink).click();
 	}
 	
-	public void enterPromoCode() throws InterruptedException{
+	public void enterPromoCode(String promoCode) throws InterruptedException{
 		driver.findElement(promoCodeLink).click();
 		Thread.sleep(2000);
-		driver.findElement(promoCodeInputBox).sendKeys("Bus150");
+		driver.findElement(promoCodeInputBox).sendKeys(promoCode);
 	}
 	
 }

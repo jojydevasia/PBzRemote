@@ -195,12 +195,12 @@ public class PaytmBusListPage {
 	
 	
 	public void selectSeats(int reqSeats) throws InterruptedException{
-		Thread.sleep(5000);
+		
 		if(reqSeats>5 || reqSeats<1){
 			System.out.println("Invalid # seats. Please enter a value from 0-5");
 			return;
 		}
-		
+		Thread.sleep(5000);
 		List<WebElement> busRecordList=driver.findElements(busRecord);
 		for(int j=0;j<=busRecordList.size();j++){
 			String seatMsg=(busRecordList.get(j).findElement(seatsAvailableTxt)).getText();
