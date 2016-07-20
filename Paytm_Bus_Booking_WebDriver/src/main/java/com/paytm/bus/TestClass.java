@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
@@ -149,27 +150,32 @@ public class TestClass {
 			System.out.println("Read Cancellation  Policy : ");
 			pdp.readCancellationPolicy();Thread.sleep(5000);
 			System.out.println("Fare on button : "+ pdp.getFareOnPayButton());
+			String parentWindowHandle=driver.getWindowHandle();
+			System.out.println("Main Window Handle: "+driver.getWindowHandle());
 			pdp.clickTnCLink();
 			System.out.println("Click TErms link");
-			Set<String> handles= driver.getWindowHandles();
-			System.out.println("Handle Set Size : "+handles.size());
-			String[] tempHandl=new String[2];
-			tempHandl[0]="One";
-			tempHandl[1]="Two";
-			System.out.println();
 			
-			for(int i=0;i<=handles.size();i++){
-				if(handles.iterator().hasNext()){
-					String tempStr=handles.iterator().next();
-					tempHandl[i]=tempStr;
-				}
+			for(String winHandle:driver.getWindowHandles()){
+				driver.switchTo().window(winHandle);
 			}
-			System.out.println("Main  Win Handle: "+ tempHandl[0]);
-			System.out.println("Child Win Handle: "+ tempHandl[1]);
+			System.out.println("Child window Handle: "+driver.getWindowHandle());
+			String childWindowHandle=driver.getWindowHandle();
+			System.out.println("Child Window title: "+driver.getTitle());
+			//driver.close();
+			/* Set<String> handles= driver.getWindowHandles();
+			// System.out.println("Handle Set Size : "+handles.size());
 			
-			driver.switchTo().window(tempHandl[1]);
-			System.out.println("Terms Window Title" +driver.getTitle());
-			driver.switchTo().defaultContent();
+			String[] tempHandl=new String[2];
+			Iterator<String> itr=handles.iterator();
+			for(int i=0;i<(handles.size()-1);i++){
+				tempHandl[i]=itr.next();
+			}
+			System.out.println("[ "+tempHandl[0]+" , "+tempHandl[1]+" ]");
+			
+			driver.switchTo().window(tempHandl[0]);
+			System.out.println("Terms Window Title" +driver.getTitle()); */
+			Thread.sleep(3000);
+			driver.switchTo().window(parentWindowHandle);
 			Thread.sleep(2000);
 			
 		    pdp.enterPromoCode("Bus 150");
