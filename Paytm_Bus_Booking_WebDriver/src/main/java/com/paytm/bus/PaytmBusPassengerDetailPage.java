@@ -6,7 +6,11 @@ import java.io.IOException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class PaytmBusPassengerDetailPage {
@@ -40,7 +44,8 @@ public class PaytmBusPassengerDetailPage {
 	By cancellationPolicyLink=By.xpath("//a[contains(text(),'Cancellation Policy')]");   //cssSelector("a:contains('Cancellation Policy')");  
 	By termsLink=	By.xpath("//a[contains(text(),'Terms and Conditions')]");    //cssSelector("a:contains('Terms and Conditions')"); //  
 	By promoCodeLink=By.xpath("//div[@class='promo']/a[contains(text(),'Promo Code')]");   //cssSelector("div.'promo'>a:contains('Promo Code')");  
-	By promoCodeInputBox=By.xpath("//input[@ng-model='promoCode']");   //cssSelector("input[ng-model='promoCode']"); 
+	By promoCodeInputBox=By.xpath("//input[@ng-model='promoCode']");   //cssSelector("input[ng-model='promoCode']");
+	By applyPromoLink=By.cssSelector("span.apply.thin.blue");
 	
 	
 	
@@ -175,10 +180,21 @@ public class PaytmBusPassengerDetailPage {
 		driver.findElement(termsLink).click();
 	}
 	
-	public void enterPromoCode(String promoCode) throws InterruptedException{
+	public void applyPromoCode(String promoCode) throws InterruptedException{
+		System.out.println(driver.findElement(promoCodeLink).getText());
 		driver.findElement(promoCodeLink).click();
+		Thread.sleep(6000);
+		driver.findElement(promoCodeInputBox).click();
 		Thread.sleep(2000);
 		driver.findElement(promoCodeInputBox).sendKeys(promoCode);
+		Thread.sleep(1000);
+		driver.findElement(applyPromoLink).click();
 	}
+	
+	//public void applyWait(WebElement webEl){
+	//	WebDriverWait wait=new WebDriverWait(driver,10);
+	//	wait.until(ExpectedConditions.elementToBeClickable(webEl));
+	//}
+	
 	
 }

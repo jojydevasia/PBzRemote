@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -37,6 +38,7 @@ public class TestClass {
 		
 		driver.get("https://paytm.com/bus-tickets/search/Bangalore/Chennai/2016-08-07");
 		driver.manage().window().maximize();
+		///driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS);
 		//System.out.println(driver.getTitle());
 		//System.out.println(driver.findElement(By.xpath("//i[contains(@ng-click,'swapStartDestination')]")).getTagName());
 		//System.out.println(driver.findElement(By.xpath("//div[contains(@ng-click,'clearOriginSearch')]//i")));
@@ -176,11 +178,18 @@ public class TestClass {
 			System.out.println("Terms Window Title" +driver.getTitle()); */
 			Thread.sleep(3000);
 			driver.switchTo().window(parentWindowHandle);
+			//driver.switchTo().defaultContent();
 			Thread.sleep(2000);
+			System.out.println("Parent handle again :  "+driver.getWindowHandle());
+			Thread.sleep(20000);
+			System.out.println("MainWindow Title again"+driver.getTitle());
 			
-		    pdp.enterPromoCode("Bus 150");
+		    pdp.applyPromoCode("Bus 150");
 		    System.out.println("entered PromoCode");
-			
+		    Thread.sleep(3000);
+		    
+			//System.out.println(driver.findElement(pdp.proceedToPayButton).getText());
+		    pdp.clickProceedToPayButton();
 			
 		
 		 
